@@ -2,11 +2,6 @@ import datetime
 from peewee import *
 from flask_login import UserMixin
 
-DATABASE = PostgresqlDatabase('board_app')
-
-class User(UserMixin, Model):
-    username = CharField(unique = True)
-    email = CharField(unique = True)
     password = CharField()
 
     class Meta: 
@@ -18,6 +13,16 @@ class Board(Model):
     created_at = DateTimeField(default=datetime.datetime.now)
     loggedUser = ForeignKeyField(User, backref = 'boards')
 
+    class Meta:
+        database = DATABASE
+
+class Message(Model):
+    name = CharField()
+    body = CharField()
+    topic = ForeignKeyField(Board, backref = 'messages')
+    auther = ForeignKeyField(User, backref = 'messages')
+    created_at = DateTimeField(default=datetime.datetime.now)
+    
     class Meta:
         database = DATABASE
 
