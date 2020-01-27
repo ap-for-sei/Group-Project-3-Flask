@@ -11,7 +11,7 @@ boards = Blueprint('boards', 'boards')
 @login_required
 def get_all_boards():
     try:
-        boards = [model_to_dict(board) for board in models.Board.select().where(models.Board.loggedUser_id == current_user.id)]
+        boards = [model_to_dict(board) for board in models.Board.select()]
         print(boards)
         for board in boards:
             board['loggedUser'].pop('password')
@@ -26,6 +26,7 @@ def create_board():
     try:
         payload = request.get_json()
         payload['loggedUser'] = current_user.id
+        print(payload, "<<<<hitting post route from React")
         board = models.Board.create(**payload)
         print(board.__dict__)
         board_dict = model_to_dict(board)
@@ -47,7 +48,7 @@ def get_one_board(id):
 
 # Update route
 @boards.route('/<id>', methods=["PUT"])
-def updated_board(id):
+def update_dog(id):
     try:
         payload = request.get_json()
         payload['loggedUser'] = current_user.id

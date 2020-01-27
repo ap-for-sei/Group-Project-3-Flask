@@ -11,7 +11,7 @@ messages = Blueprint('messages', 'messages')
 @login_required
 def get_all_messages():
     try:
-        messages = [model_to_dict(massage) for massage in models.Massage.select().where(models.Massage.loggedUser_id == current_user.id)]
+        messages = [model_to_dict(massage) for massage in models.Massage.select()]
         print(messages)
         for massage in messages:
             massage['loggedUser'].pop('password')
@@ -26,6 +26,7 @@ def create_massage():
     try:
         payload = request.get_json()
         payload['loggedUser'] = current_user.id
+        print(payload, "<<<<hitting post route from React")
         massage = models.Massage.create(**payload)
         print(massage.__dict__)
         massage_dict = model_to_dict(massage)
@@ -47,7 +48,7 @@ def get_one_massage(id):
 
 # Update route
 @messages.route('/<id>', methods=["PUT"])
-def updated_massage(id):
+def update_dog(id):
     try:
         payload = request.get_json()
         payload['loggedUser'] = current_user.id
