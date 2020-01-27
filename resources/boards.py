@@ -48,7 +48,7 @@ def get_one_board(id):
 
 # Update route
 @boards.route('/<id>', methods=["PUT"])
-def update_dog(id):
+def updated_board(id):
     try:
         payload = request.get_json()
         payload['loggedUser'] = current_user.id

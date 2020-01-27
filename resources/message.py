@@ -48,7 +48,7 @@ def get_one_message(id):
 
 # Update route
 @messages.route('/<id>', methods=["PUT"])
-def update_dog(id):
+def updated_message(id):
     try:
         payload = request.get_json()
         payload['author'] = current_user.id
