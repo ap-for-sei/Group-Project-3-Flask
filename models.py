@@ -25,7 +25,7 @@ class Message(Model):
     name = CharField()
     body = CharField()
     topic = ForeignKeyField(Board, backref = 'messages')
-    auther = ForeignKeyField(User, backref = 'messages')
+    author = ForeignKeyField(User, backref = 'messages')
     created_at = DateTimeField(default=datetime.datetime.now)
     
     class Meta:
