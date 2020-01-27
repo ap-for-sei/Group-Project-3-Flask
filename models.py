@@ -2,11 +2,6 @@ import datetime
 from peewee import *
 from flask_login import UserMixin
 
-    password = CharField()
-
-    class Meta: 
-        database = DATABASE
-
 class Board(Model):
     name = CharField()
     body = CharField()
