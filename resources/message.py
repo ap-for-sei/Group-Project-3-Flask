@@ -14,7 +14,7 @@ def get_all_messages():
         messages = [model_to_dict(message) for message in models.Message.select()]
         print(messages)
         for message in messages:
-            message['loggedUser'].pop('password')
+            message['author'].pop('password')
         return jsonify(data=messages, status={"code": 200, "message": "Success"})
     except models.DoesNotExist:
         return jsonify(data={}, status={"code": 400, "message": "Error getting the resources"})
@@ -25,7 +25,7 @@ def get_all_messages():
 def create_message():
     try:
         payload = request.get_json()
-        payload['loggedUser'] = current_user.id
+        payload['author'] = current_user.id
         print(payload, "<<<<hitting post route from React")
         message = models.Message.create(**payload)
         print(message.__dict__)
@@ -51,7 +51,7 @@ def get_one_message(id):
 def update_dog(id):
     try:
         payload = request.get_json()
-        payload['loggedUser'] = current_user.id
+        payload['author'] = current_user.id
 
         query = models.Message.update(**payload).where(models.Message.id == id)
         query.execute()

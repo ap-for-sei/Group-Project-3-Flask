@@ -2,7 +2,9 @@ import datetime
 from peewee import *
 from flask_login import UserMixin
 
-DATABASE = PostgresqlDatabase('pro_app')
+# DATABASE = PostgresqlDatabase('pro_app')
+DATABASE = SqliteDatabase('pro_app')
+
 
 class User(UserMixin, Model):
     username = CharField(unique = True, null = False)
@@ -33,6 +35,6 @@ class Message(Model):
 
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([User, Board], safe = True)
+    DATABASE.create_tables([User, Board, Message], safe = True)
     print("TABLES Created")
     DATABASE.close()
