@@ -22,10 +22,12 @@ class Board(Model):
         database = DATABASE
 
 class Message(Model):
+    name = CharField()
     body = CharField()
-    topic = ForeignKeyField(Board, backref = 'message')
-    Auther = ForeignKeyField(User, backref = 'message')
-
+    topic = ForeignKeyField(Board, backref = 'messages')
+    auther = ForeignKeyField(User, backref = 'messages')
+    created_at = DateTimeField(default=datetime.datetime.now)
+    
     class Meta:
         database = DATABASE
 
