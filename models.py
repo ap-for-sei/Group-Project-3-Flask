@@ -5,8 +5,8 @@ from flask_login import UserMixin
 DATABASE = PostgresqlDatabase('pro_app')
 
 class User(UserMixin, Model):
-    username = CharField(unique = True)
-    email = CharField(unique = True)
+    username = CharField(unique = True, null = False)
+    email = CharField(unique = True, null = False)
     password = CharField()
 
     class Meta: 
@@ -17,6 +17,14 @@ class Board(Model):
     body = CharField()
     created_at = DateTimeField(default=datetime.datetime.now)
     loggedUser = ForeignKeyField(User, backref = 'boards')
+
+    class Meta:
+        database = DATABASE
+
+class Message(Model):
+    body = CharField()
+    topic = ForeignKeyField(Board, backref = 'message')
+    Auther = ForeignKeyField(User, backref = 'message')
 
     class Meta:
         database = DATABASE
