@@ -21,6 +21,16 @@ class Board(Model):
     class Meta:
         database = DATABASE
 
+class Message(Model):
+    name = CharField()
+    body = CharField()
+    topic = ForeignKeyField(Board, backref = 'messages')
+    auther = ForeignKeyField(User, backref = 'messages')
+    created_at = DateTimeField(default=datetime.datetime.now)
+    
+    class Meta:
+        database = DATABASE
+
 def initialize():
     DATABASE.connect()
     DATABASE.create_tables([User, Board], safe = True)
