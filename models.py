@@ -15,7 +15,7 @@ class User(UserMixin, Model):
         database = DATABASE
 
 class Board(Model):
-    name = CharField()
+    name = CharField(unique = True, null = False)
     body = CharField()
     created_at = DateTimeField(default=datetime.datetime.now)
     loggedUser = ForeignKeyField(User, backref = 'boards')
