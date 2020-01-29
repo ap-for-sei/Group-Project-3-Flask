@@ -2,9 +2,13 @@ import datetime
 from peewee import *
 from flask_login import UserMixin
 
+<<<<<<< HEAD
 # DATABASE = PostgresqlDatabase('pro_app')
 DATABASE = SqliteDatabase('pro_app')
 
+=======
+DATABASE = PostgresqlDatabase('board_app')
+>>>>>>> origin
 
 class User(UserMixin, Model):
     username = CharField(unique = True, null = False)
@@ -27,7 +31,11 @@ class Message(Model):
     name = CharField()
     body = CharField()
     topic = ForeignKeyField(Board, backref = 'messages')
+<<<<<<< HEAD
     author = ForeignKeyField(User, backref = 'messages')
+=======
+    auther = ForeignKeyField(User, backref = 'messages')
+>>>>>>> origin
     created_at = DateTimeField(default=datetime.datetime.now)
     
     class Meta:
