@@ -2,9 +2,7 @@ import datetime
 from peewee import *
 from flask_login import UserMixin
 
-# DATABASE = PostgresqlDatabase('pro_app')
-DATABASE = SqliteDatabase('pro_app')
-
+DATABASE = PostgresqlDatabase('post_it_app')
 
 class User(UserMixin, Model):
     username = CharField(unique = True, null = False)
