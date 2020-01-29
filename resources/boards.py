@@ -48,7 +48,11 @@ def get_one_board(id):
 
 # Update route
 @boards.route('/<id>', methods=["PUT"])
+<<<<<<< HEAD
+def updated_board(id):
+=======
 def update_board(id):
+>>>>>>> origin
     try:
         payload = request.get_json()
         payload['loggedUser'] = current_user.id

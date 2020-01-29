@@ -10,7 +10,7 @@ login_manager.init_app(app)
 import models
 from resources.boards import boards
 from resources.users import users
-
+from resources.message import messages
 @login_manager.user_loader
 def load_user(userid):
     try:
@@ -32,9 +32,12 @@ def unauthorized():
 
 from resources.users import users
 from resources.boards import boards
+from resources.message import messages
 
 CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(boards, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(messages, origins=['http://localhost:3000'], supports_credentials=True)
+
 
 @app.before_request
 def before_request():
@@ -44,6 +47,7 @@ def before_request():
 
 app.register_blueprint(users, url_prefix='/api/v1/users')
 app.register_blueprint(boards, url_prefix='/api/v1/boards')
+app.register_blueprint(messages, url_prefix='/api/v1/messages')
 
 @app.after_request
 def after_request(response):
