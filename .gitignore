@@ -106,3 +106,7 @@ venv.bak/
 dmypy.json
 # Pyre type checker
 .pyre/
+
+.vscode/settings.json
+__pycache__/models.cpython-36.pyc
+resources/__pycache__/boards.cpython-36.pyc
