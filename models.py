@@ -15,6 +15,7 @@ class User(UserMixin, Model):
 class Board(Model):
     name = CharField(unique = True, null = False)
     body = CharField()
+    image = CharField()
     created_at = DateTimeField(default=datetime.datetime.now)
     loggedUser = ForeignKeyField(User, backref = 'boards')
 
