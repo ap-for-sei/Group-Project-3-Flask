@@ -1,8 +1,13 @@
+import os
+from playhouse.db_url import connect
 import datetime
 from peewee import *
 from flask_login import UserMixin
 
-DATABASE = PostgresqlDatabase('post_it_app')
+if 'ON_HEROKU' in os.environ:
+    DATABASE = connect(os.environ.get('DATABASE_URL'))
+else:
+    DATABASE = PostgresqlDatabase('post_it_app')
 
 class User(UserMixin, Model):
     username = CharField(unique = True, null = False)

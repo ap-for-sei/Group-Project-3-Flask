@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify, g
 from flask_cors import CORS
 from flask_login import LoginManager
@@ -34,9 +35,9 @@ from resources.users import users
 from resources.boards import boards
 from resources.message import messages
 
-CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
-CORS(boards, origins=['http://localhost:3000'], supports_credentials=True)
-CORS(messages, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(users, origins=['http://localhost:3000', 'https://post-hub.herokuapp.com'], supports_credentials=True)
+CORS(boards, origins=['http://localhost:3000', 'https://post-hub.herokuapp.com'], supports_credentials=True)
+CORS(messages, origins=['http://localhost:3000', 'https://post-hub.herokuapp.com'], supports_credentials=True)
 
 
 @app.before_request
@@ -60,6 +61,9 @@ def index():
 
 DEBUG = True
 PORT = 8000
+if 'ON_HEROKU' in os.environ:
+    print('hitting ')
+    models.initialize()
 if __name__ == '__main__':
     models.initialize()
     app.run(debug=DEBUG, port=PORT)
