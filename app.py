@@ -35,7 +35,7 @@ from resources.users import users
 from resources.boards import boards
 from resources.message import messages
 
-CORS(users, origins=['http://localhost:3000', 'http://post-hub.herokuapp.com'], supports_credentials=True)
+CORS(users, origins=['http://localhost:3000', 'http://post-hub.herokuapp.com/'], supports_credentials=True)
 CORS(boards, origins=['http://localhost:3000', 'http://post-hub.herokuapp.com'], supports_credentials=True)
 CORS(messages, origins=['http://localhost:3000', 'http://post-hub.herokuapp.com'], supports_credentials=True)
 
